@@ -6,7 +6,10 @@ extends KinematicBody2D
 
 export var MAX_SPEED = 200
 export var TURN_SPEED = 2
+export var STARTING_FUEL = 100
+export var FUEL_CONSUMPTION_RATE_PER_SECOND = 3
 
+var fuel = STARTING_FUEL
 var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
 
@@ -19,6 +22,9 @@ func _ready():
 func _process(delta):
 	var p = get_pos()
 	var r = get_rot()
+	
+	# Consume fuel
+	fuel = fuel - FUEL_CONSUMPTION_RATE_PER_SECOND * delta
 	
 	# Rotate the sprite
 	set_rot(r + turn_speed * delta)
@@ -34,7 +40,7 @@ func _process(delta):
 	velocity = Vector2(MAX_SPEED, 0).rotated(get_rot())
 	
 	move(velocity * delta)
-
+	
 
 # Called from main game input handler
 func go_up():

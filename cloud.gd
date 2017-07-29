@@ -5,28 +5,26 @@ extends Node2D
 # var b = "textvar"
 
 var velocity = Vector2(-rand_range(10,50), 0)
-var MAX_DISTANCE = 10
-var distance = rand_range(-MAX_DISTANCE, 1)
+var MAX_DEPTH = 10
+var distance = rand_range(-MAX_DEPTH, 1)
 var currentCloud = null
+var dead = false
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_process(true)
-
-	# Hide all cloud sprites
-	for cloud in get_children():
-		cloud.hide()
 	
 	# Choose a random cloud sprite
 	var random = rand_range(0, get_child_count()-1)
 	currentCloud = get_child(random)
 	currentCloud.show()
 	
-	# Randomly position cloud outside of camera
-	var pos = G.get_player().get_pos() + Vector2(G.get_screen_width(), 0).rotated(randf() * 2 * PI)
-	set_pos(pos)
-	
+	# Remove all nodes that are not the selected cloud
+	for cloud in get_children():
+		if cloud != currentCloud:
+			cloud.queue_free()
+
 	# Set size
 	var scale = rand_range(1,2)
 	set_scale(Vector2(scale, scale))
@@ -65,6 +63,7 @@ func _ready():
 	# Has face?
 	if currentCloud.get_child_count() > 0:
 		change_animation()
+	
 
 func _process(delta):
 	# Move clouds
@@ -73,8 +72,21 @@ func _process(delta):
 	# Kill clouds when far from player
 	var distance = get_pos().distance_to(G.get_player().get_pos())
 	if distance > G.get_screen_width() * 2:
-		queue_free()
+		kill()
 		
+
+func kill():
+	dead = true
+	
+	
+# Bring back from the dead
+func revive():
+	dead = false
+	
+	# Randomly position cloud outside of camera
+	var pos = G.get_player().get_pos() + Vector2(G.get_screen_width(), 0).rotated(randf() * 2 * PI)
+	set_pos(pos)
+	
 
 func change_animation():
 	var face = currentCloud.get_child(0)
