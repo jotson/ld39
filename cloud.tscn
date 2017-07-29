@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://cloud.gd" type="Script" id=1]
+[ext_resource path="res://clouds/cloud-01.png" type="Texture" id=2]
+[ext_resource path="res://clouds/cloud-02.png" type="Texture" id=3]
+[ext_resource path="res://clouds/cloud-03.png" type="Texture" id=4]
+[ext_resource path="res://clouds/cloud-04.png" type="Texture" id=5]
+[ext_resource path="res://clouds/cloud-05.png" type="Texture" id=6]
+
+[node name="cloud" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="cloud1" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="cloud2" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+
+[node name="cloud3" type="Sprite" parent="."]
+
+texture = ExtResource( 4 )
+
+[node name="cloud4" type="Sprite" parent="."]
+
+texture = ExtResource( 5 )
+
+[node name="cloud5" type="Sprite" parent="."]
+
+texture = ExtResource( 6 )
+
+
