@@ -6,7 +6,7 @@ extends Node2D
 
 var velocity = Vector2(-rand_range(10,50), 0)
 var MAX_DISTANCE = 10
-var distance = rand_range(-MAX_DISTANCE, 3)
+var distance = rand_range(-MAX_DISTANCE, 1)
 var currentCloud = null
 
 func _ready():
@@ -55,15 +55,9 @@ func _ready():
 		c.r = rand_range(0,1)
 		currentCloud.set_modulate(c)
 	
-	# Move clouds close but behind plane to foreground
-	if distance > -1:
-		distance = 1
-	
 	# Speed up foreground clouds
-	if distance > -2:
-		velocity = velocity * 5
 	if distance > 0:
-		velocity = velocity * 5
+		velocity = velocity * 2
 		
 	# Set depth
 	set_z(distance)

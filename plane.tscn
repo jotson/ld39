@@ -35,12 +35,13 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
+MAX_SPEED = 200
+TURN_SPEED = 2
 
-[node name="plane" type="AnimatedSprite" parent="."]
+[node name="body" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 3
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]
@@ -48,13 +49,14 @@ playing = true
 transform/pos = Vector2( 21, -2 )
 frames = SubResource( 2 )
 animation = "default"
+frame = 1
 playing = true
 
 [node name="tailSmokeParticles" type="Particles2D" parent="."]
 
 z/z = -1
-config/amount = 50
-config/lifetime = 1.0
+config/amount = 200
+config/lifetime = 4.0
 config/process_mode = 1
 config/offset = Vector2( -10, 0 )
 config/local_space = false
@@ -64,8 +66,8 @@ params/spread = 10.0
 params/linear_velocity = 30.0
 params/spin_velocity = 0.0
 params/orbit_velocity = 0.0
-params/gravity_direction = 180.0
-params/gravity_strength = 20.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
 params/radial_accel = 0.0
 params/tangential_accel = 0.0
 params/damping = 0.0
