@@ -11,6 +11,12 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	randomize()
+	
+	# Center window
+	var ss = OS.get_screen_size(0)
+	var ws = OS.get_window_size()
+	OS.set_window_position(Vector2(ss.x/2 - ws.x/2, ss.y/2 - ws.y/1.33))
+	
 	set_process(true)
 
 func _process(delta):
