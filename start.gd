@@ -51,6 +51,8 @@ func _input(event):
 func _fixed_process(delta):
 	create_cloud()
 	
+	G.get_player().fuel = 100
+	
 	if action == 'up':
 		G.get_player().go_up()
 	else:
@@ -64,8 +66,7 @@ func play_game():
 
 
 func quit_game():
-	play_beep()
-	quit_game()
+	get_tree().quit()
 
 
 func create_cloud():

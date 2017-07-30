@@ -11,11 +11,12 @@ export(float) var FUEL_CONSUMPTION_RATE_PER_SECOND = 3.0
 export var FUEL_REFILL = 25
 export var MAX_FUEL = 100
 export var fuel = 100
+export(bool) var be_quiet = false
 
 var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
-
 var gas_caught = 0
+var plane_voice
 
 signal update_fuel(fuel)
 
@@ -23,6 +24,9 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_fixed_process(true)
+	plane_voice = Sfx.play("plane")
+	if be_quiet:
+		Sfx.set_volume(plane_voice, 0)
 
 
 func _fixed_process(delta):
@@ -39,7 +43,18 @@ func _fixed_process(delta):
 	set_rot(r + turn_speed * delta)
 	turn_speed = turn_speed * 0.85
 	
-	# Limit rotation
+	# Update propeller soound
+	var pitch = PI + abs(get_rot()) + rand_range(-0.1, 0.1)
+	pitch = abs(pitch / PI * 0.75)
+	if fuel <= 15 and fuel > 0:
+		pitch = pitch * fuel / 15
+	if fuel <= 0:
+		Sfx.set_volume(plane_voice, 0)
+	if fuel > 0 and !be_quiet:
+		Sfx.set_volume(plane_voice, 1)
+	Sfx.set_pitch_scale(plane_voice, pitch)
+
+		# Limit rotation
 	#if get_rot() > PI/2 - 0.1:
 	#	set_rot(PI/2 - 0.1)
 	#if get_rot() < -PI/2 + 0.1:
@@ -80,4 +95,3 @@ func add_gas(amount = 0):
 	gas_caught = gas_caught + 1
 	if gas_caught >= 3:
 		G.tutorial = false
-	

@@ -130,7 +130,7 @@ func create_gas():
 
 func quit_game():
 	OS.set_window_fullscreen(false)
-	quit_game()
+	get_tree().quit()
 
 
 func continue_game():

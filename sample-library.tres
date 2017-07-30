@@ -1,0 +1,27 @@
+[gd_resource type="SampleLibrary" load_steps=4 format=1]
+
+[ext_resource path="res://sounds/beep.smp" type="Sample" id=1]
+[ext_resource path="res://sounds/click.smp" type="Sample" id=2]
+[ext_resource path="res://sounds/plane.smp" type="Sample" id=3]
+
+[resource]
+
+samples/beep = {
+"db": -5.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 1 )
+}
+samples/click = {
+"db": -10.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/plane = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+
