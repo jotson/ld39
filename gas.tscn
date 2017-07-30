@@ -37,7 +37,7 @@ tracks/0/keys = {
 [node name="gas" type="KinematicBody2D"]
 
 visibility/behind_parent = true
-transform/rot = 7.57693
+transform/rot = 12.5135
 input/pickable = false
 collision/layers = 1
 collision/mask = 1

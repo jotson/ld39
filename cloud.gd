@@ -13,7 +13,7 @@ var dead = false
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_process(true)
+	set_fixed_process(true)
 	
 	# Choose a random cloud sprite
 	var random = rand_range(0, get_child_count()-1)
@@ -65,7 +65,7 @@ func _ready():
 		change_animation()
 	
 
-func _process(delta):
+func _fixed_process(delta):
 	# Move clouds
 	move(velocity * delta)
 	

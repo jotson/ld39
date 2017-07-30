@@ -55,7 +55,7 @@ fuel = 100
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 4
+frame = 3
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]
@@ -63,7 +63,6 @@ playing = true
 transform/pos = Vector2( 21, -2 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 1
 playing = true
 
 [node name="tailSmokeParticles" type="Particles2D" parent="."]
