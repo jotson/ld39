@@ -10,6 +10,7 @@ var cloudPool = Array()
 var MAX_CLOUDS = 500
 var elapsed = 0
 
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
@@ -17,6 +18,8 @@ func _ready():
 	set_process_input(true)
 	for i in range(1,MAX_CLOUDS):
 		create_cloud(true)
+		
+	G.get_player().connect("update_fuel", self, "update_fuel_handler")
 
 
 func _process(delta):
@@ -32,9 +35,17 @@ func _process(delta):
 	if Input.is_action_pressed("down"):
 		G.get_player().go_down()
 
-	get_node("ui/fuelLabel").set_text(str(int(G.get_player().fuel)))
+	move_camera()
 
-	# Move camera
+
+func update_fuel_handler(fuel):
+	if fuel > 100:
+		fuel = 100
+	var fill = get_node("ui/fuel-bar/fuel-fill-bar")
+	fill.set_scale(Vector2(fuel/100,1))
+	
+
+func move_camera():
 	# The follow camera is causing some frame jank
 	# so I'm adding shake to hide it
 	var player = G.get_player()

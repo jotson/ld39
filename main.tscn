@@ -1,11 +1,33 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://plane.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/fuel-bar.png" type="Texture" id=2]
+[ext_resource path="res://ui/fuel-fill-bar.png" type="Texture" id=3]
+[ext_resource path="res://plane.tscn" type="PackedScene" id=4]
 
 [node name="game" type="Node2D"]
 
 script/script = ExtResource( 1 )
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="fuel-bar" type="Sprite" parent="ui"]
+
+transform/pos = Vector2( 142, 20 )
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="fuel-fill-bar" type="Sprite" parent="ui/fuel-bar"]
+
+transform/pos = Vector2( -35, -5 )
+texture = ExtResource( 3 )
+centered = false
 
 [node name="camera" type="Camera2D" parent="."]
 
@@ -27,7 +49,7 @@ drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
 
-[node name="plane" parent="." instance=ExtResource( 2 )]
+[node name="player" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 335, 168 )
 
@@ -37,28 +59,6 @@ process_mode = 1
 wait_time = 0.05
 one_shot = false
 autostart = true
-
-[node name="ui" type="CanvasLayer" parent="."]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-
-[node name="fuelLabel" type="Label" parent="ui"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 9.0
-margin/top = 9.0
-margin/right = 49.0
-margin/bottom = 23.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="gasTimer" type="Timer" parent="."]
 

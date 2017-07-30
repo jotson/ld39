@@ -9,10 +9,13 @@ export var TURN_SPEED = 2
 export var STARTING_FUEL = 100
 export var FUEL_CONSUMPTION_RATE_PER_SECOND = 3
 export var FUEL_REFILL = 25
+export var MAX_FUEL = 100
 
 var fuel = STARTING_FUEL
 var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
+
+signal update_fuel(fuel)
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -26,6 +29,7 @@ func _fixed_process(delta):
 	
 	# Consume fuel
 	fuel = fuel - FUEL_CONSUMPTION_RATE_PER_SECOND * delta
+	emit_signal("update_fuel", fuel)
 	
 	# Rotate the sprite
 	set_rot(r + turn_speed * delta)
@@ -52,4 +56,7 @@ func go_down():
 
 func add_gas():
 	fuel = fuel + FUEL_REFILL
+	if fuel > MAX_FUEL:
+		fuel = MAX_FUEL
+	emit_signal("update_fuel", fuel)
 	

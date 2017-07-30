@@ -5,7 +5,7 @@ extends Node
 # var b = "textvar"
 
 onready var camera = get_node("/root/game/camera")
-onready var player = get_node("/root/game/plane")
+onready var player = get_node("/root/game/player")
 
 func _ready():
 	# Called every time the node is added to the scene.

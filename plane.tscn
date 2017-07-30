@@ -47,12 +47,14 @@ MAX_SPEED = 200
 TURN_SPEED = 2
 STARTING_FUEL = 100
 FUEL_CONSUMPTION_RATE_PER_SECOND = 3
-FUEL_REFILL = 25
+FUEL_REFILL = 10
+MAX_FUEL = 100
 
 [node name="body" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
 animation = "default"
+frame = 3
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]
@@ -60,6 +62,7 @@ playing = true
 transform/pos = Vector2( 21, -2 )
 frames = SubResource( 2 )
 animation = "default"
+frame = 1
 playing = true
 
 [node name="tailSmokeParticles" type="Particles2D" parent="."]
