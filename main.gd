@@ -18,6 +18,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_process(true)
+	
 	set_process_input(true)
 	for i in range(1,MAX_CLOUDS):
 		create_cloud(true)
@@ -26,6 +27,8 @@ func _ready():
 		create_gas()
 		
 	G.get_player().connect("update_fuel", self, "update_fuel_handler")
+
+	get_node("tutorialAnimation").play("tutorial")
 
 
 func _process(delta):
@@ -45,6 +48,8 @@ func _process(delta):
 		else:
 			G.get_player().coast()
 
+	get_node("instructions").set_pos(G.get_player().get_pos() + Vector2(-100, 40))
+	
 	move_camera()
 
 
@@ -130,5 +135,5 @@ func quit_game():
 
 func continue_game():
 	G.state = 'playing'
-	G.get_player().add_gas(50)
+	G.get_player().add_gas(G.get_player().MAX_FUEL)
 	get_node("ui/gameover").hide()

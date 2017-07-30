@@ -15,6 +15,8 @@ export var fuel = 100
 var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
 
+var gas_caught = 0
+
 signal update_fuel(fuel)
 
 func _ready():
@@ -47,7 +49,8 @@ func _fixed_process(delta):
 	velocity = Vector2(MAX_SPEED, 0).rotated(get_rot())
 	
 	# Track total distance flown
-	G.total_distance += velocity.length() * delta
+	if G.state == 'playing':
+		G.total_distance += velocity.length() * delta
 	
 	move(velocity * delta)
 	
@@ -73,4 +76,8 @@ func add_gas(amount = 0):
 	if fuel > MAX_FUEL:
 		fuel = MAX_FUEL
 	emit_signal("update_fuel", fuel)
+
+	gas_caught = gas_caught + 1
+	if gas_caught >= 3:
+		G.tutorial = false
 	

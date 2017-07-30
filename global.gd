@@ -4,10 +4,8 @@ extends Node
 # var a = 2
 # var b = "textvar"
 
-onready var camera = get_node("/root/game/camera")
-onready var player = get_node("/root/game/player")
-
 var state = 'playing'
+var tutorial = true
 
 # Total distance flown in pixels
 var total_distance = 0.0
@@ -24,6 +22,13 @@ func _ready():
 	
 	set_process(true)
 
+
+func start_playing():
+	total_distance = 0.0
+	state = 'playing'
+	tutorial = true
+	
+	
 func _process(delta):
 	pass
 	
@@ -36,7 +41,7 @@ func get_screen_height():
 	return size.y
 
 func get_camera():
-	return camera
+	return get_node("/root/game/camera")
 	
 func get_player():
-	return player
+	return get_node("/root/game/player")

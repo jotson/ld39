@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://gas.gd" type="Script" id=1]
 [ext_resource path="res://gas/gas-01.png" type="Texture" id=2]
+[ext_resource path="res://fonts/main-text.fnt" type="BitmapFont" id=3]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
@@ -17,9 +18,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
-resource/name = "default"
 length = 1.0
 loop = true
 step = 0.1
@@ -34,10 +34,27 @@ tracks/0/keys = {
 "values": [ -15.0, 15.0 ]
 }
 
+[sub_resource type="Animation" id=4]
+
+resource/name = "tutorial"
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("instructions:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false ]
+}
+
 [node name="gas" type="KinematicBody2D"]
 
 visibility/behind_parent = true
-transform/rot = -1.05138
+transform/rot = 12.4454
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
@@ -50,7 +67,7 @@ editor/display_folded = true
 transform/pos = Vector2( 0, 20 )
 transform/rot = 8.53774e-07
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1.54198, 0, 0, 2.75717, -0.766382, 1.50373 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -62,26 +79,37 @@ angular_damp = 1.0
 
 transform/pos = Vector2( -0.766382, 1.50373 )
 transform/scale = Vector2( 1.54198, 2.75717 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
 transform/pos = Vector2( -1.18598, 20.8864 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "default"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="wobbleAnimation" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/default = SubResource( 2 )
+anims/default = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "default"
+
+[node name="tutorialAnimation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/tutorial = SubResource( 4 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "tutorial"
 
 [node name="killTimer" type="Timer" parent="."]
 
@@ -96,6 +124,26 @@ process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
+
+[node name="instructions" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -43.0
+margin/top = -61.0
+margin/right = 44.0
+margin/bottom = -15.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -4
+custom_constants/shadow_as_outline = 1
+text = "Catch me
+for FUEL!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="body_enter" from="Area2D" to="." method="collision_detected"]
 

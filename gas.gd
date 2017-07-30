@@ -17,7 +17,7 @@ func _ready():
 	var t = get_node("startTimer")
 	t.set_wait_time(rand_range(0,1))
 	t.start()
-
+	
 
 func _fixed_process(delta):
 	move(velocity * delta)
@@ -29,6 +29,13 @@ func revive():
 	var pos = G.get_player().get_pos() + Vector2(rand_range(1, 2), 0).rotated(rand_range(-PI/4, PI/4)) * G.get_screen_width()
 	set_pos(pos)
 	show()
+
+	if G.tutorial:
+		get_node("tutorialAnimation").play("tutorial")
+	else:
+		print("stop")
+		get_node("tutorialAnimation").stop_all()
+		get_node("instructions").hide()
 
 
 func kill():
@@ -50,4 +57,4 @@ func collision_detected(body):
 
 
 func start_animation():
-	get_node("AnimationPlayer").play("default")
+	get_node("wobbleAnimation").play("default")
