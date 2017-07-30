@@ -9,6 +9,9 @@ onready var player = get_node("/root/game/player")
 
 var state = 'playing'
 
+# Total distance flown in pixels
+var total_distance = 0.0
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

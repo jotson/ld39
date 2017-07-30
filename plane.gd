@@ -46,6 +46,9 @@ func _fixed_process(delta):
 	# Rotate the velocity vectory
 	velocity = Vector2(MAX_SPEED, 0).rotated(get_rot())
 	
+	# Track total distance flown
+	G.total_distance += velocity.length() * delta
+	
 	move(velocity * delta)
 	
 

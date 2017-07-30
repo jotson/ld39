@@ -55,7 +55,7 @@ fuel = 100
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 2
+frame = 4
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]
