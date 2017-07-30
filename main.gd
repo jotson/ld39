@@ -10,7 +10,6 @@ var cloudPool = Array()
 var MAX_CLOUDS = 500
 var elapsed = 0
 
-
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
@@ -29,24 +28,38 @@ func _process(delta):
 	# _input is only called when the input changes so
 	# it works okay for keyboard repeat but doesn't work
 	# right when you're just holding a gamepad axis or button
-	if Input.is_action_pressed("up"):
-		G.get_player().go_up()
-		
-	if Input.is_action_pressed("down"):
-		G.get_player().go_down()
+	if G.state == 'playing':
+		#if Input.is_action_pressed("up"):
+		#	G.get_player().go_up()
+		#if Input.is_action_pressed("down"):
+		#	G.get_player().go_down()
+		if Input.is_action_pressed("up"):
+			G.get_player().go_up()
+		else:
+			G.get_player().coast()
 
 	move_camera()
 
 
 func update_fuel_handler(fuel):
+	if G.state != 'playing':
+		return
+		
 	if fuel > 100:
 		fuel = 100
-	if fuel < 0:
+	if fuel <= 0:
 		fuel = 0
+		gameover()
+		
 	var fill = get_node("ui/fuel-bar/fuel-fill-bar")
 	fill.set_scale(Vector2(fuel/100,1))
 	
 
+func gameover():
+	G.state = 'gameover'
+	get_node("ui/gameover").show()
+	
+	
 func move_camera():
 	# The follow camera is causing some frame jank
 	# so I'm adding shake to hide it
@@ -85,5 +98,17 @@ func create_cloud(override = false):
 
 
 func create_gas():
-	var g = Gas.instance()
-	add_child(g)
+	if G.state == 'playing':
+		var g = Gas.instance()
+		add_child(g)
+
+
+func quit_game():
+	OS.set_window_fullscreen(false)
+	quit_game()
+
+
+func continue_game():
+	G.state = 'playing'
+	G.get_player().add_gas(50)
+	get_node("ui/gameover").hide()

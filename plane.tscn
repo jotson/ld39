@@ -44,17 +44,18 @@ collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 MAX_SPEED = 200
-TURN_SPEED = 2
-STARTING_FUEL = 100
-FUEL_CONSUMPTION_RATE_PER_SECOND = 3
+TURN_SPEED = 2.0
+COAST_TURN_SPEED = 1.0
+FUEL_CONSUMPTION_RATE_PER_SECOND = 3.0
 FUEL_REFILL = 10
 MAX_FUEL = 100
+fuel = 100
 
 [node name="body" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 3
+frame = 2
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]

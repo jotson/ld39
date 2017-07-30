@@ -7,6 +7,8 @@ extends Node
 onready var camera = get_node("/root/game/camera")
 onready var player = get_node("/root/game/player")
 
+var state = 'playing'
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

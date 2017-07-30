@@ -18,10 +18,6 @@ func _ready():
 	var t = get_node("startTimer")
 	t.set_wait_time(rand_range(0,1))
 	t.start()
-	
-	var t = get_node("expireTimer")
-	t.set_wait_time(rand_range(5,8))
-	t.start()
 
 
 func _fixed_process(delta):

@@ -5,13 +5,13 @@ extends KinematicBody2D
 # var b = "textvar"
 
 export var MAX_SPEED = 200
-export var TURN_SPEED = 2
-export var STARTING_FUEL = 100
-export var FUEL_CONSUMPTION_RATE_PER_SECOND = 3
+export(float) var TURN_SPEED = 2.0
+export(float) var COAST_TURN_SPEED = 1.0
+export(float) var FUEL_CONSUMPTION_RATE_PER_SECOND = 3.0
 export var FUEL_REFILL = 25
 export var MAX_FUEL = 100
+export var fuel = 100
 
-var fuel = STARTING_FUEL
 var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
 
@@ -29,6 +29,8 @@ func _fixed_process(delta):
 	
 	# Consume fuel
 	fuel = fuel - FUEL_CONSUMPTION_RATE_PER_SECOND * delta
+	if fuel < 0:
+		fuel = 0
 	emit_signal("update_fuel", fuel)
 	
 	# Rotate the sprite
@@ -54,8 +56,17 @@ func go_up():
 func go_down():
 	turn_speed = -TURN_SPEED
 
-func add_gas():
-	fuel = fuel + FUEL_REFILL
+func coast():
+	var r = get_rot()
+	if r >= PI/2 || r < -PI/4:
+		turn_speed = COAST_TURN_SPEED
+	else:
+		turn_speed = -COAST_TURN_SPEED
+	
+func add_gas(amount = 0):
+	if amount == 0:
+		amount = FUEL_REFILL
+	fuel = fuel + amount
 	if fuel > MAX_FUEL:
 		fuel = MAX_FUEL
 	emit_signal("update_fuel", fuel)
