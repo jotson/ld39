@@ -86,4 +86,6 @@ texture = ExtResource( 25 )
 visibility/visible = false
 texture = ExtResource( 26 )
 
+[connection signal="finished" from="cloud1/face" to="." method="change_animation"]
+
 

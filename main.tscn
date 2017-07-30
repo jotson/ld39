@@ -47,7 +47,6 @@ scale = Vector2( 1, 1 )
 
 [node name="fuelLabel" type="Label" parent="ui"]
 
-visibility/visible = false
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -61,6 +60,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="gasTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
 [connection signal="timeout" from="cloudTimer" to="." method="create_cloud"]
+
+[connection signal="timeout" from="gasTimer" to="." method="create_gas"]
 
 

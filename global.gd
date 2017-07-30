@@ -4,8 +4,8 @@ extends Node
 # var a = 2
 # var b = "textvar"
 
-onready var cam1 = get_tree().get_current_scene().get_node("plane/camera")
-onready var player = get_tree().get_current_scene().get_node("plane")
+onready var camera = get_node("/root/game/camera")
+onready var player = get_node("/root/game/plane")
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -25,7 +25,7 @@ func get_screen_height():
 	return size.y
 
 func get_camera():
-	return cam1
+	return camera
 	
 func get_player():
 	return player

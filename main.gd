@@ -4,7 +4,8 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
-var cloud = load("res://cloud.tscn")
+var Cloud = load("res://cloud.tscn")
+var Gas = load("res://gas.tscn")
 var cloudPool = Array()
 var MAX_CLOUDS = 500
 var elapsed = 0
@@ -55,7 +56,7 @@ func _input(event):
 
 func create_cloud(override = false):
 	if cloudPool.size() < MAX_CLOUDS:
-		var c = cloud.instance()
+		var c = Cloud.instance()
 		add_child(c)
 		cloudPool.append(c)
 		if override:
@@ -68,3 +69,8 @@ func create_cloud(override = false):
 			if c.dead == true:
 				c.revive()
 				break
+
+
+func create_gas():
+	var g = Gas.instance()
+	add_child(g)

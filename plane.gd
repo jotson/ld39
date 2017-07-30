@@ -8,6 +8,7 @@ export var MAX_SPEED = 200
 export var TURN_SPEED = 2
 export var STARTING_FUEL = 100
 export var FUEL_CONSUMPTION_RATE_PER_SECOND = 3
+export var FUEL_REFILL = 25
 
 var fuel = STARTING_FUEL
 var velocity = Vector2(MAX_SPEED, 0)
@@ -16,10 +17,10 @@ var turn_speed = 0
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_process(true)
+	set_fixed_process(true)
 
 
-func _process(delta):
+func _fixed_process(delta):
 	var p = get_pos()
 	var r = get_rot()
 	
@@ -48,4 +49,7 @@ func go_up():
 
 func go_down():
 	turn_speed = -TURN_SPEED
+
+func add_gas():
+	fuel = fuel + FUEL_REFILL
 	

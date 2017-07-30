@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://plane.gd" type="Script" id=1]
 [ext_resource path="res://plane/plane-01.png" type="Texture" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://plane/propeller-01.png" type="Texture" id=7]
 [ext_resource path="res://plane/propeller-02.png" type="Texture" id=8]
 [ext_resource path="res://plane/smoke.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -31,6 +36,9 @@ animations = [ {
 [node name="Player" type="KinematicBody2D"]
 
 input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 2.50214, 0, 0, 1.52673, 0.267814, -0.910659 )
+shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
@@ -39,12 +47,12 @@ MAX_SPEED = 200
 TURN_SPEED = 2
 STARTING_FUEL = 100
 FUEL_CONSUMPTION_RATE_PER_SECOND = 3
+FUEL_REFILL = 25
 
 [node name="body" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
 animation = "default"
-frame = 1
 playing = true
 
 [node name="propeller" type="AnimatedSprite" parent="."]
@@ -79,5 +87,13 @@ params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.267814, -0.910659 )
+transform/scale = Vector2( 2.50214, 1.52673 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
 
 
