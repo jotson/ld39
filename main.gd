@@ -41,6 +41,8 @@ func _process(delta):
 func update_fuel_handler(fuel):
 	if fuel > 100:
 		fuel = 100
+	if fuel < 0:
+		fuel = 0
 	var fill = get_node("ui/fuel-bar/fuel-fill-bar")
 	fill.set_scale(Vector2(fuel/100,1))
 	
