@@ -5,9 +5,13 @@ extends Node2D
 # var b = "textvar"
 
 var Cloud = load("res://cloud.tscn")
-var Gas = load("res://gas.tscn")
 var cloudPool = Array()
 var MAX_CLOUDS = 500
+
+var Gas = load("res://gas.tscn")
+var gasPool = Array()
+var MAX_GAS = 100
+
 var elapsed = 0
 
 func _ready():
@@ -17,6 +21,9 @@ func _ready():
 	set_process_input(true)
 	for i in range(1,MAX_CLOUDS):
 		create_cloud(true)
+		
+	for i in range(1,10):
+		create_gas()
 		
 	G.get_player().connect("update_fuel", self, "update_fuel_handler")
 
@@ -81,7 +88,15 @@ func _input(event):
 
 
 func create_cloud(override = false):
-	if cloudPool.size() < MAX_CLOUDS:
+	var found = false
+	
+	for c in cloudPool:
+		if c.dead == true:
+			c.revive()
+			found = true
+			break
+			
+	if !found && cloudPool.size() < MAX_CLOUDS:
 		var c = Cloud.instance()
 		add_child(c)
 		cloudPool.append(c)
@@ -90,17 +105,22 @@ func create_cloud(override = false):
 			pos.x = rand_range(G.get_player().get_pos().x - G.get_screen_width() * 2, G.get_player().get_pos().x + G.get_screen_width() * 2)
 			pos.y = rand_range(G.get_player().get_pos().y - G.get_screen_height() * 2, G.get_player().get_pos().y + G.get_screen_height() * 2)
 			c.set_pos(pos)
-	else:
-		for c in cloudPool:
-			if c.dead == true:
-				c.revive()
-				break
 
 
 func create_gas():
 	if G.state == 'playing':
-		var g = Gas.instance()
-		add_child(g)
+		var found = false
+		
+		for g in gasPool:
+			if g.dead == true:
+				g.revive()
+				found = true
+				break
+				
+		if !found && gasPool.size() < MAX_GAS:
+			var g = Gas.instance()
+			add_child(g)
+			gasPool.append(g)
 
 
 func quit_game():

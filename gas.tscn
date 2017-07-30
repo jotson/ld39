@@ -37,7 +37,7 @@ tracks/0/keys = {
 [node name="gas" type="KinematicBody2D"]
 
 visibility/behind_parent = true
-transform/rot = 12.5135
+transform/rot = -1.05138
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
@@ -83,7 +83,7 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = "default"
 
-[node name="expireTimer" type="Timer" parent="."]
+[node name="killTimer" type="Timer" parent="."]
 
 process_mode = 1
 wait_time = 15.0
@@ -99,7 +99,7 @@ autostart = false
 
 [connection signal="body_enter" from="Area2D" to="." method="collision_detected"]
 
-[connection signal="timeout" from="expireTimer" to="." method="expire"]
+[connection signal="timeout" from="killTimer" to="." method="kill"]
 
 [connection signal="timeout" from="startTimer" to="." method="start_animation"]
 
