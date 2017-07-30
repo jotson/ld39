@@ -1,8 +1,9 @@
-[gd_resource type="SampleLibrary" load_steps=4 format=1]
+[gd_resource type="SampleLibrary" load_steps=5 format=1]
 
 [ext_resource path="res://sounds/beep.smp" type="Sample" id=1]
 [ext_resource path="res://sounds/click.smp" type="Sample" id=2]
 [ext_resource path="res://sounds/plane.smp" type="Sample" id=3]
+[ext_resource path="res://sounds/wind.smp" type="Sample" id=4]
 
 [resource]
 
@@ -24,4 +25,9 @@ samples/plane = {
 "priority": 0,
 "sample": ExtResource( 3 )
 }
-
+samples/wind = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}

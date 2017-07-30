@@ -154,6 +154,7 @@ drag_margin/bottom = 0.2
 [node name="player" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 335, 168 )
+fuel = 10
 be_quiet = false
 
 [node name="instructions" type="Label" parent="."]

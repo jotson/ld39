@@ -17,6 +17,7 @@ var velocity = Vector2(MAX_SPEED, 0)
 var turn_speed = 0
 var gas_caught = 0
 var plane_voice
+var wind_voice
 
 signal update_fuel(fuel)
 
@@ -24,9 +25,12 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_fixed_process(true)
+	
 	plane_voice = Sfx.play("plane")
+	wind_voice = Sfx.play("wind")
 	if be_quiet:
 		Sfx.set_volume(plane_voice, 0)
+		Sfx.set_volume(wind_voice, 0)
 
 
 func _fixed_process(delta):
@@ -44,22 +48,17 @@ func _fixed_process(delta):
 	turn_speed = turn_speed * 0.85
 	
 	# Update propeller soound
-	var pitch = PI + abs(get_rot()) + rand_range(-0.1, 0.1)
-	pitch = abs(pitch / PI * 0.75)
-	if fuel <= 15 and fuel > 0:
-		pitch = pitch * fuel / 15
-	if fuel <= 0:
-		Sfx.set_volume(plane_voice, 0)
-	if fuel > 0 and !be_quiet:
-		Sfx.set_volume(plane_voice, 1)
-	Sfx.set_pitch_scale(plane_voice, pitch)
+	if G.state == 'playing':
+		var pitch = PI + abs(get_rot()) + rand_range(-0.1, 0.1)
+		pitch = abs(pitch / PI * 0.75)
+		if fuel <= 15 and fuel > 0:
+			pitch = pitch * fuel / 15
+		if fuel <= 0:
+			Sfx.set_volume(plane_voice, 0)
+		if fuel > 0 && !be_quiet:
+			Sfx.set_volume(plane_voice, 1)
+		Sfx.set_pitch_scale(plane_voice, pitch)
 
-		# Limit rotation
-	#if get_rot() > PI/2 - 0.1:
-	#	set_rot(PI/2 - 0.1)
-	#if get_rot() < -PI/2 + 0.1:
-	#	set_rot(-PI/2 + 0.1)
-		
 	# Rotate the velocity vectory
 	velocity = Vector2(MAX_SPEED, 0).rotated(get_rot())
 	
