@@ -45,6 +45,8 @@ func kill():
 	get_node("Particles2D").set_emitting(true)
 	dead = true
 	get_node("AnimatedSprite").hide()
+	get_node("tutorialAnimation").stop_all()
+	get_node("instructions").hide()
 
 
 func collision_detected(body):

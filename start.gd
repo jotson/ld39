@@ -62,7 +62,7 @@ func _fixed_process(delta):
 func play_game():
 	G.start_playing()
 	play_beep()
-	get_tree().change_scene("res://main.tscn")
+	get_tree().change_scene("res://cutscene.tscn")
 
 
 func quit_game():
