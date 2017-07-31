@@ -100,5 +100,5 @@ func add_gas(amount = 0):
 	emit_signal("update_fuel", fuel)
 
 	gas_caught = gas_caught + 1
-	if gas_caught >= 3:
+	if gas_caught >= 1:
 		G.tutorial = false

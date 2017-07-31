@@ -73,6 +73,14 @@ func update_fuel_handler(fuel):
 func gameover():
 	G.state = 'gameover'
 	get_node("ui/gameover").show()
+	G.get_player().hide()
+	
+	
+func continue_game():
+	G.state = 'playing'
+	G.get_player().add_gas(G.get_player().MAX_FUEL)
+	G.get_player().show()
+	get_node("ui/gameover").hide()
 	
 	
 func move_camera():
@@ -134,9 +142,3 @@ func create_gas():
 func quit_game():
 	OS.set_window_fullscreen(false)
 	get_tree().quit()
-
-
-func continue_game():
-	G.state = 'playing'
-	G.get_player().add_gas(G.get_player().MAX_FUEL)
-	get_node("ui/gameover").hide()
