@@ -26,6 +26,8 @@ func _fixed_process(delta):
 		get_node("AnimatedSprite").play("happy")
 	else:
 		get_node("AnimatedSprite").play("default")
+		
+	
 
 func revive():
 	dead = false
