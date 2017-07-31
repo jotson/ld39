@@ -66,6 +66,9 @@ func update_fuel_handler(fuel):
 	var fill = get_node("ui/fuel-bar/fuel-fill-bar")
 	fill.set_scale(Vector2(fuel/100,1))
 	
+	var label = get_node("ui/distance-label")
+	label.set_text(str(round(G.total_distance)))
+	
 
 func gameover():
 	G.state = 'gameover'

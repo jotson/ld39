@@ -49,6 +49,14 @@ func _fixed_process(delta):
 	
 	# Update propeller soound
 	if G.state == 'playing':
+		# Restart sounds
+		if !Sfx.is_voice_active(plane_voice) && !be_quiet:
+			print("restarting plane")
+			plane_voice = Sfx.play("plane")
+		if !Sfx.is_voice_active(wind_voice) && !be_quiet:
+			print("restarting wind")
+			wind_voice = Sfx.play("wind")
+			
 		var pitch = PI + abs(get_rot()) + rand_range(-0.1, 0.1)
 		pitch = abs(pitch / PI * 0.75)
 		if fuel <= 15 and fuel > 0:

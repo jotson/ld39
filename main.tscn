@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://ui/fuel-bar.png" type="Texture" id=2]
-[ext_resource path="res://ui/fuel-fill-bar.png" type="Texture" id=3]
-[ext_resource path="res://fonts/main-text.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://fonts/main-text.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://ui/fuel-bar.png" type="Texture" id=3]
+[ext_resource path="res://ui/fuel-fill-bar.png" type="Texture" id=4]
 [ext_resource path="res://plane.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
@@ -44,15 +44,33 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
+[node name="fuel-label" type="Label" parent="ui"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 19.0
+margin/top = 8.0
+margin/right = 64.0
+margin/bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "FUEL"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="fuel-bar" type="Sprite" parent="ui"]
 
-transform/pos = Vector2( 142, 20 )
-texture = ExtResource( 2 )
+transform/pos = Vector2( 143, 21 )
+texture = ExtResource( 3 )
 
 [node name="fuel-fill-bar" type="Sprite" parent="ui/fuel-bar"]
 
 transform/pos = Vector2( -70, -10 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 centered = false
 
 [node name="gameover" type="Panel" parent="ui"]
@@ -87,7 +105,7 @@ margin/left = 48.0
 margin/top = 37.0
 margin/right = -47.0
 margin/bottom = 12.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "Continue?"
 align = 1
 percent_visible = 1.0
@@ -104,7 +122,7 @@ margin/left = 30.0
 margin/top = 53.0
 margin/right = 88.0
 margin/bottom = 84.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -121,12 +139,49 @@ margin/left = 110.0
 margin/top = 53.0
 margin/right = 168.0
 margin/bottom = 84.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "No"
 flat = false
+
+[node name="distance-label-label" type="Label" parent="ui"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 297.0
+margin/top = 8.0
+margin/right = 387.0
+margin/bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "DISTANCE"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="distance-label" type="Label" parent="ui"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 397.0
+margin/top = 8.0
+margin/right = 437.0
+margin/bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.843137, 0.482353, 0.729412, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "0px"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="camera" type="Camera2D" parent="."]
 
@@ -165,7 +220,7 @@ margin/left = 231.0
 margin/top = 101.0
 margin/right = 439.0
 margin/bottom = 126.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Hold SPACE to FLY UP!"

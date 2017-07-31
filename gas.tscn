@@ -98,6 +98,7 @@ _update_shape_index = 0
 transform/pos = Vector2( -1.18598, 20.8864 )
 frames = SubResource( 2 )
 animation = "default"
+frame = 1
 playing = true
 
 [node name="wobbleAnimation" type="AnimationPlayer" parent="."]
