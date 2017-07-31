@@ -46,14 +46,12 @@ scale = Vector2( 1, 1 )
 
 [node name="fuel-bar" type="Sprite" parent="ui"]
 
-editor/display_folded = true
 transform/pos = Vector2( 142, 20 )
-transform/scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="fuel-fill-bar" type="Sprite" parent="ui/fuel-bar"]
 
-transform/pos = Vector2( -35, -5 )
+transform/pos = Vector2( -70, -10 )
 texture = ExtResource( 3 )
 centered = false
 
@@ -132,7 +130,6 @@ flat = false
 
 [node name="camera" type="Camera2D" parent="."]
 
-visibility/visible = false
 transform/pos = Vector2( 434, 168 )
 anchor_mode = 1
 rotating = false
@@ -154,7 +151,6 @@ drag_margin/bottom = 0.2
 [node name="player" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 335, 168 )
-fuel = 10
 be_quiet = false
 
 [node name="instructions" type="Label" parent="."]

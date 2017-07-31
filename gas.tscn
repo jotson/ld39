@@ -1,8 +1,13 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://gas.gd" type="Script" id=1]
 [ext_resource path="res://gas/gas-01.png" type="Texture" id=2]
-[ext_resource path="res://fonts/main-text.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://gas/gas-02.png" type="Texture" id=3]
+[ext_resource path="res://gas/gas-03.png" type="Texture" id=4]
+[ext_resource path="res://gas/happy-01.png" type="Texture" id=5]
+[ext_resource path="res://gas/happy-02.png" type="Texture" id=6]
+[ext_resource path="res://gas/happy-03.png" type="Texture" id=7]
+[ext_resource path="res://fonts/main-text.fnt" type="BitmapFont" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -12,9 +17,14 @@ extents = Vector2( 10, 10 )
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "happy",
 "speed": 5.0
 } ]
 
@@ -88,6 +98,7 @@ _update_shape_index = 0
 transform/pos = Vector2( -1.18598, 20.8864 )
 frames = SubResource( 2 )
 animation = "default"
+playing = true
 
 [node name="wobbleAnimation" type="AnimationPlayer" parent="."]
 
@@ -135,7 +146,7 @@ margin/left = -43.0
 margin/top = -61.0
 margin/right = 44.0
 margin/bottom = -15.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = -4
 custom_constants/shadow_as_outline = 1
@@ -144,6 +155,34 @@ for FUEL!"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+transform/pos = Vector2( -0.579465, 37.5003 )
+z/z = -1
+config/amount = 60
+config/lifetime = 0.5
+config/emit_timeout = 0.1
+config/emitting = false
+config/process_mode = 1
+config/local_space = false
+config/explosiveness = 0.3
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 100.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 5.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
 
 [connection signal="body_enter" from="Area2D" to="." method="collision_detected"]
 

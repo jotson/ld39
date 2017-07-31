@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://gas/no-chute.png" type="Texture" id=1]
+[ext_resource path="res://gas-no-chute.gd" type="Script" id=2]
+
+[node name="gas" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+
+

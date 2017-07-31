@@ -21,30 +21,30 @@ func _ready():
 
 func _fixed_process(delta):
 	move(velocity * delta)
-
+	
+	if get_pos().distance_to(G.get_player().get_pos()) < 200:
+		get_node("AnimatedSprite").play("happy")
+	else:
+		get_node("AnimatedSprite").play("default")
 
 func revive():
 	dead = false
 	get_node("killTimer").start()
 	var pos = G.get_player().get_pos() + Vector2(rand_range(1, 2), 0).rotated(rand_range(-PI/4, PI/4)) * G.get_screen_width()
 	set_pos(pos)
-	show()
+	get_node("AnimatedSprite").show()
 
 	if G.tutorial:
 		get_node("tutorialAnimation").play("tutorial")
 	else:
-		print("stop")
 		get_node("tutorialAnimation").stop_all()
 		get_node("instructions").hide()
 
 
 func kill():
+	get_node("Particles2D").set_emitting(true)
 	dead = true
-	hide()
-
-
-func go_away():
-	queue_free()
+	get_node("AnimatedSprite").hide()
 
 
 func collision_detected(body):
@@ -52,8 +52,13 @@ func collision_detected(body):
 		return
 		
 	if body == G.get_player():
+		Sfx.play("get-gas")
 		G.get_player().add_gas()
 		kill()
+		var NoChute = load("res://gas-no-chute.tscn")
+		var t = NoChute.instance()
+		t.set_pos(get_pos())
+		get_node("/root/game").add_child(t)
 
 
 func start_animation():
